@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Sync Demo
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+
+        <ion-list>
+            <ion-item-sliding *ngFor="let item of items">
+                <ion-item (click)="onItem(item)">
+                    {{item.data?.name}}
+                    <p>{{item.id}}</p>
+                    <ion-note item-end>
+                        {{item.moment}}
+                    </ion-note>
+                </ion-item>
+                <ion-item-options side="right">
+                    <!-- <button danger (click)="dragAndDrop()" ion-button><ion-icon name="trash"></ion-icon> Delete</button> -->
+                    <button danger (click)="removeItem(item)" ion-button color="danger"><ion-icon name="trash"></ion-icon> Delete</button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+    </ion-card>
+
+</ion-content>
