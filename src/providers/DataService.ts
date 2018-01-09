@@ -6,11 +6,15 @@ import * as $fh from 'fh-js-sdk';
 @Injectable()
 export class DataService {
     syncData: EventEmitter<any>;
-    
-    datasetId = "ShoppingList";
+    datasetId: string;
+    option: any;
 
     constructor() {
         this.syncData = new EventEmitter();
+        this.datasetId = "ShoppingList";
+        this.option = {
+          "sync_frequency": 30
+        }
     }
 
     unwrapList = (r) => {
@@ -51,6 +55,7 @@ export class DataService {
           "storage_strategy" : "dom"
         });
         let datasetId = this.datasetId;
+        let option = this.option;
         let unwrapList = this.unwrapList;
         let syncData = this.syncData;
         return new Promise((resolve, reject) => {
@@ -68,8 +73,11 @@ export class DataService {
                 reject(error);
               };
         
-              $fh.sync.manage(datasetId);
-              $fh.sync.notify(function(notification) {
+              $fh.sync.manage(datasetId, option, {}, {}, function(){
+                console.log('dataset ' + datasetId + ' is now managed by sync');
+              });
+
+              $fh.sync.notify(function(notification: any) {
                 if( 'sync_complete' == notification.code ) {
                   console.log('sync_coplete', datasetId);
                   $fh.sync.doList(datasetId, success, fail);

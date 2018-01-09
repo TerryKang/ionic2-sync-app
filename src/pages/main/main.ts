@@ -8,7 +8,7 @@ import { DataService } from '../../providers/DataService';
   templateUrl: 'main.html'
 })
 export class MainPage {
-  items:any;
+  items: any;
   subscription: any;
 
   constructor(public navCtrl: NavController, public dataService: DataService) {

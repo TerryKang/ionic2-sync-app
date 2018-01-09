@@ -7,7 +7,7 @@ import { DataService } from '../../providers/DataService';
   templateUrl: 'details.html'
 })
 export class DetailsPage {
-  title: any;
+  title: string;
   item: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dataService: DataService) {
